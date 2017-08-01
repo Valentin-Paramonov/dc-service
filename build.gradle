@@ -11,6 +11,7 @@ buildscript {
 }
 
 apply plugin: 'java'
+apply plugin: 'groovy'
 apply plugin: 'org.springframework.boot'
 
 version = '0.0.1-SNAPSHOT'
@@ -24,7 +25,30 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-jooq')
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile 'org.codehaus.groovy:groovy-all:2.4.12'
     runtime('com.h2database:h2')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.security:spring-security-test')
 }
+
+sourceSets {
+    endpointTest {
+        groovy {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/endpoint-test/groovy')
+        }
+    }
+}
+
+configurations {
+    endpointTestCompile.extendsFrom testCompile
+    endpointTestRuntime.extendsFrom testRuntime
+}
+
+task endpointTest(type: Test) {
+    testClassesDirs = sourceSets.endpointTest.output.classesDirs
+    classpath = sourceSets.endpointTest.runtimeClasspath
+}
+
+build.dependsOn endpointTest
