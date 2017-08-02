@@ -22,13 +22,17 @@ repositories {
 }
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-jooq')
-    compile('org.springframework.boot:spring-boot-starter-security')
-    compile('org.springframework.boot:spring-boot-starter-web')
+    compile 'org.springframework.boot:spring-boot-starter-jooq'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.codehaus.groovy:groovy-all:2.4.12'
-    compile('org.dizitart:nitrite:1.0.1')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile('org.springframework.security:spring-security-test')
+    compile 'org.dizitart:nitrite:1.0.1'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.springframework.security:spring-security-test'
+    testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
+    testCompile 'net.bytebuddy:byte-buddy:1.7.1'
+    testCompile 'org.objenesis:objenesis:2.6'
+    testCompile 'org.spockframework:spock-spring:1.1-groovy-2.4'
 }
 
 sourceSets {
@@ -39,11 +43,20 @@ sourceSets {
             srcDir file('src/endpoint-test/groovy')
         }
     }
+    integrationTest {
+        groovy {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integration-test/groovy')
+        }
+    }
 }
 
 configurations {
     endpointTestCompile.extendsFrom testCompile
     endpointTestRuntime.extendsFrom testRuntime
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
 }
 
 task endpointTest(type: Test) {
@@ -51,4 +64,10 @@ task endpointTest(type: Test) {
     classpath = sourceSets.endpointTest.runtimeClasspath
 }
 
+task integrationTest(type: Test) {
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+    classpath = sourceSets.integrationTest.runtimeClasspath
+}
+
 build.dependsOn endpointTest
+build.dependsOn integrationTest

@@ -7,7 +7,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-@Profile(ConfigurationProfile.prod)
+@Profile({
+    ConfigurationProfile.prod,
+    ConfigurationProfile.integrationTest
+})
 class AppConfig {
     @Bean
     PasswordEncoder encoder() {

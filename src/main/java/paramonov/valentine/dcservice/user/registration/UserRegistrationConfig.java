@@ -8,7 +8,10 @@ import paramonov.valentine.dcservice.ConfigurationProfile;
 import paramonov.valentine.dcservice.db.Db;
 
 @Configuration
-@Profile(ConfigurationProfile.prod)
+@Profile({
+    ConfigurationProfile.prod,
+    ConfigurationProfile.integrationTest
+})
 class UserRegistrationConfig {
     @Bean
     UserRegistrationRecordCreator userRegistrationRecordCreator(Db db, PasswordEncoder encoder) {
