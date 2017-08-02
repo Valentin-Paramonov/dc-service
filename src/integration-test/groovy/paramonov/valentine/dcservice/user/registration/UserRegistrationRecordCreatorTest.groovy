@@ -1,6 +1,7 @@
 package paramonov.valentine.dcservice.user.registration
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.crypto.password.PasswordEncoder
 import paramonov.valentine.dcservice.IntegrationTestBase
 import paramonov.valentine.dcservice.db.Db
 import paramonov.valentine.dcservice.db.User
@@ -14,14 +15,16 @@ class UserRegistrationRecordCreatorTest extends IntegrationTestBase {
     @Autowired
     Db db
 
-    def "should create a record in database"() {
+    @Autowired
+    PasswordEncoder encoder
+
+    def "should create a record with encrypted password"() {
         when:
             registrationRecord.create('a@b.cd', 'ha')
         then:
             def record = findByEmail('a@b.cd')
             record.email == 'a@b.cd'
-            record.password.length() == 60
-            record.password.startsWith('$2a$10$')
+            encoder.matches('ha', record.password)
     }
 
     private User findByEmail(email) {
