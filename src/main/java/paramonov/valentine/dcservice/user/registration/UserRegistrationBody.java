@@ -1,8 +1,8 @@
-package paramonov.valentine.dcservice.registration;
+package paramonov.valentine.dcservice.user.registration;
 
 public class UserRegistrationBody {
-    private String email;
-    private String password;
+    String email;
+    String password;
 
     public String getEmail() {
         return email;
