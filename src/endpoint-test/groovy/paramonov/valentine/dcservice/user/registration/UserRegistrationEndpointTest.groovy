@@ -15,7 +15,7 @@ class UserRegistrationEndpointTest extends EndpointTestBase {
     private UserRegistrationRecordCreator registrationRecord
 
     @Test
-    void "should create record"() {
+    void "should pass email and password to record creator"() {
         mvc().
             perform(
                 post("/user/register").
