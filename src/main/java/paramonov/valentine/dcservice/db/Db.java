@@ -2,9 +2,10 @@ package paramonov.valentine.dcservice.db;
 
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.ObjectRepository;
-import org.springframework.beans.factory.DisposableBean;
 
-public class Db implements DisposableBean {
+import javax.annotation.PreDestroy;
+
+public class Db {
     private final Nitrite db;
 
     Db(Nitrite db) {
@@ -15,8 +16,8 @@ public class Db implements DisposableBean {
         return db.getRepository(type);
     }
 
-    @Override
-    public void destroy() throws Exception {
+    @PreDestroy
+    void closeDb() {
         db.close();
     }
 }

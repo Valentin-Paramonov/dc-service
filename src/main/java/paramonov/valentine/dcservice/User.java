@@ -1,4 +1,4 @@
-package paramonov.valentine.dcservice.db;
+package paramonov.valentine.dcservice;
 
 import org.dizitart.no2.objects.Index;
 import org.dizitart.no2.objects.Indices;

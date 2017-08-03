@@ -1,22 +1,13 @@
 package paramonov.valentine.dcservice.security;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import paramonov.valentine.dcservice.ConfigurationProfile;
 
-@Configuration
 @EnableWebSecurity
-class SecurityConfig extends WebSecurityConfigurerAdapter {
-    SecurityConfig() {
-        // disable default configuration
-        super(true);
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-            .authorizeRequests()
-            .antMatchers("/").permitAll();
-    }
+@Profile({
+    ConfigurationProfile.prod,
+    ConfigurationProfile.integrationTest
+})
+class SecurityConfig {
 }

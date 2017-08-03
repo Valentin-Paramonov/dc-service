@@ -3,8 +3,8 @@ package paramonov.valentine.dcservice.user.registration
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
 import paramonov.valentine.dcservice.IntegrationTestBase
+import paramonov.valentine.dcservice.User
 import paramonov.valentine.dcservice.db.Db
-import paramonov.valentine.dcservice.db.User
 
 import static org.dizitart.no2.objects.filters.ObjectFilters.eq
 

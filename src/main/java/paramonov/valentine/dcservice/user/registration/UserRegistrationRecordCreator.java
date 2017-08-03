@@ -1,21 +1,18 @@
 package paramonov.valentine.dcservice.user.registration;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-import paramonov.valentine.dcservice.db.Db;
-import paramonov.valentine.dcservice.db.User;
+import paramonov.valentine.dcservice.user.Users;
 
 class UserRegistrationRecordCreator {
-    private final Db db;
+    private final Users users;
     private final PasswordEncoder encoder;
 
-    UserRegistrationRecordCreator(Db db, PasswordEncoder encoder) {
-        this.db = db;
+    UserRegistrationRecordCreator(Users users, PasswordEncoder encoder) {
+        this.users = users;
         this.encoder = encoder;
     }
 
     void create(String email, String password) {
-        db
-            .repo(User.class)
-            .insert(new User(email, encoder.encode(password)));
+        users.create(email, encoder.encode(password));
     }
 }
