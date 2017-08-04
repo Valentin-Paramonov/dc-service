@@ -7,7 +7,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Collections;
 import java.util.Optional;
+
+import static java.util.Collections.emptyList;
 
 public class TokenAuthenticationProvider {
     private static final String Authentication = "Authentication";
@@ -29,7 +32,7 @@ public class TokenAuthenticationProvider {
             .map(s -> s.substring(tokenPrefix.length()))
             .map(parser::username)
             .map(userDetails::loadUserByUsername)
-            .map(user -> new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()))
+            .map(user -> new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), emptyList()))
             .orElse(null);
     }
 
