@@ -29,7 +29,7 @@ cd dc-service
 ```
 
 ## Endpoints
-* /user/register
+> /user/register
 
  Authentication: None
 
@@ -40,7 +40,7 @@ cd dc-service
     "password":"ha"
 }
 ```
-* /user/login
+> /user/login
 
  Authentication: None
 
@@ -51,7 +51,7 @@ cd dc-service
     "password":"ha"
 }
 ```
-* /customer/create
+> /customer/create
 
  Authentication: Required (JWT)
 
@@ -64,7 +64,7 @@ cd dc-service
     "email": "mark@b.cd"
 }
 ```
-* /debt-case/:personal-id/submit
+> /debt-case/:personal-id/submit
 
  Authentication: Required (JWT)
 
@@ -79,9 +79,10 @@ Response:
 ```
 Debt Case Id
 ```
-* /debt-case/:case-id/close
+> /debt-case/:case-id/close
 
  Authentication: Required (JWT)
+ 
  Request:
 ```json
 {
