@@ -13,11 +13,9 @@ class DebtCases {
         this.db = db;
     }
 
-    void create(String customer, LocalDate dueDate, BigDecimal amount) {
-        db
-            .repo(DebtCase.class)
-            .insert(
-                new DebtCase(customer, dueDate, amount, "Open")
-            );
+    String create(String customer, LocalDate dueDate, BigDecimal amount) {
+        DebtCase debtCase = new DebtCase(customer, dueDate, amount, "Open");
+        db.repo(DebtCase.class).insert(debtCase);
+        return debtCase.getId();
     }
 }

@@ -17,10 +17,10 @@ class DebtCaseCreator {
         this.debtCases = debtCases;
     }
 
-    void create(String customer, LocalDate dueDate, BigDecimal amount) {
+    String create(String customer, LocalDate dueDate, BigDecimal amount) {
         customers
             .findByPersonalIdAndAgent(customer, securityContext.getAuthenticatedUsername())
             .orElseThrow(() -> new IllegalArgumentException("Customer not found: " + customer));
-        debtCases.create(customer, dueDate, amount);
+        return debtCases.create(customer, dueDate, amount);
     }
 }

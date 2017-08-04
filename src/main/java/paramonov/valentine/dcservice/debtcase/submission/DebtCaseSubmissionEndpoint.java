@@ -14,7 +14,7 @@ public class DebtCaseSubmissionEndpoint {
     private DebtCaseCreator debtCases;
 
     @RequestMapping(value = "/debt-case/{personalId}/submit", method = POST)
-    public void submit(@PathVariable("personalId") String personalId, @RequestBody DebtCaseSubmissionBody debtCase) {
-        debtCases.create(personalId, debtCase.getDueDate(), debtCase.getAmount());
+    public String submit(@PathVariable("personalId") String personalId, @RequestBody DebtCaseSubmissionBody debtCase) {
+        return debtCases.create(personalId, debtCase.getDueDate(), debtCase.getAmount());
     }
 }

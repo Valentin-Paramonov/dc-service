@@ -1,10 +1,15 @@
 package paramonov.valentine.dcservice;
 
+import org.dizitart.no2.objects.Id;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class DebtCase implements Serializable {
+    @Id
+    private String id = UUID.randomUUID().toString();
     private String customer;
     private LocalDate dueDate;
     private BigDecimal amount;
@@ -18,6 +23,14 @@ public class DebtCase implements Serializable {
         this.dueDate = dueDate;
         this.amount = amount;
         this.status = status;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getCustomer() {

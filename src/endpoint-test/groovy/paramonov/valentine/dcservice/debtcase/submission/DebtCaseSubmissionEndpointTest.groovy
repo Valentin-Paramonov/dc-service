@@ -6,6 +6,7 @@ import paramonov.valentine.dcservice.EndpointTestBase
 import java.time.LocalDate
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 class DebtCaseSubmissionEndpointTest extends EndpointTestBase {
@@ -25,8 +26,9 @@ class DebtCaseSubmissionEndpointTest extends EndpointTestBase {
                             }
                         )
                 ).
-                andExpect(status().isOk())
+                andExpect(status().isOk()).
+                andExpect(content().string('id'))
         then: 'the parameters are passed on'
-            1 * debtCases.create('person', LocalDate.parse('2017-05-15'), 17.25)
+            1 * debtCases.create('person', LocalDate.parse('2017-05-15'), 17.25) >> 'id'
     }
 }
