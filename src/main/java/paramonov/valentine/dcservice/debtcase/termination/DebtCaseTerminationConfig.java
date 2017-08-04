@@ -11,7 +11,7 @@ import paramonov.valentine.dcservice.security.SecurityContextProvider;
 @Configuration
 @Profile({
     ConfigurationProfile.prod,
-    ConfigurationProfile.integrationTest,
+    ConfigurationProfile.integrationTest
 })
 class DebtCaseTerminationConfig {
     @Bean
