@@ -4,10 +4,12 @@ import org.dizitart.no2.IndexType;
 import org.dizitart.no2.objects.Index;
 import org.dizitart.no2.objects.Indices;
 
+import java.io.Serializable;
+
 @Indices({
     @Index(value = "personalId", type = IndexType.Unique)
 })
-public class Customer {
+public class Customer implements Serializable {
     private String name;
     private String surname;
     private String email;

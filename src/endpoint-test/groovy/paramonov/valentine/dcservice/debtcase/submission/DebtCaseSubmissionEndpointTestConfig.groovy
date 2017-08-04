@@ -1,4 +1,4 @@
-package paramonov.valentine.dcservice.user.registration
+package paramonov.valentine.dcservice.debtcase.submission
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -8,9 +8,9 @@ import spock.mock.DetachedMockFactory
 
 @Configuration
 @Profile(ConfigurationProfile.test)
-class UserRegistrationEndpointTestConfig {
+class DebtCaseSubmissionEndpointTestConfig {
     @Bean
-    UserRegistrationRecordCreator registrationRecord(DetachedMockFactory mockFactory) {
-        return mockFactory.Mock(UserRegistrationRecordCreator)
+    DebtCaseCreator debtCaseCreator(DetachedMockFactory mockFactory) {
+        return mockFactory.Mock(DebtCaseCreator)
     }
 }

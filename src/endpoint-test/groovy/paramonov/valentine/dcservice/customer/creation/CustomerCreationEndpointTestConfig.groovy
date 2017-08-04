@@ -9,10 +9,8 @@ import spock.mock.DetachedMockFactory
 @Configuration
 @Profile(ConfigurationProfile.test)
 class CustomerCreationEndpointTestConfig {
-    private final DetachedMockFactory mockFactory = new DetachedMockFactory()
-
     @Bean
-    CustomerCreator customerCreator() {
+    CustomerCreator customerCreator(DetachedMockFactory mockFactory) {
         mockFactory.Mock(CustomerCreator)
     }
 }

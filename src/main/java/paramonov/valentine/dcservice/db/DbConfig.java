@@ -1,6 +1,8 @@
 package paramonov.valentine.dcservice.db;
 
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.dizitart.no2.Nitrite;
+import org.dizitart.no2.internals.JacksonMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,8 +22,16 @@ class DbConfig {
             Nitrite
                 .builder()
                 .compressed()
+                .nitriteMapper(mapper())
                 .filePath(filePath)
                 .openOrCreate(username, password)
         );
+    }
+
+    private JacksonMapper mapper() {
+        JavaTimeModule javaTimeModule = new JavaTimeModule();
+        JacksonMapper mapper = new JacksonMapper();
+        mapper.getObjectMapper().registerModule(javaTimeModule);
+        return mapper;
     }
 }
